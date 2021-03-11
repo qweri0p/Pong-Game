@@ -1,8 +1,6 @@
 import pygame, random
-# Define some colors
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
-
 class block(pygame.sprite.Sprite):
     def __init__(self, color, width, height):
         super().__init__()
@@ -22,26 +20,16 @@ class paddle(pygame.sprite.Sprite):
  
 pygame.init()
  
-# Set the width and height of the screen [width, height]
 size = (1000, 500)
 screen = pygame.display.set_mode(size)
- 
 pygame.display.set_caption("Pong!")
- 
-# Loop until the user clicks the close button.
 done = False
-# Used to manage how fast the screen updates
 clock = pygame.time.Clock()
-
 ball = block(WHITE, 20, 20)
-
 player1 = paddle(WHITE, 25, 100)
-
 player2 = paddle(WHITE, 25, 100)
-
 player1.score = 0
 player2.score = 0
-
 block_list = pygame.sprite.Group()
 player_list = pygame.sprite.Group()
 all_sprites_list = pygame.sprite.Group()
@@ -94,9 +82,7 @@ def Player2Point():
     ball.velx = ball.velx * -1
 
 Reset()
-# -------- Main Program Loop -----------
 while not done:
-    # --- Main event loop
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             done = True
@@ -113,10 +99,6 @@ while not done:
             if event.key== pygame.K_UP:
                 pygame.key.set_repeat(1, 20)
                 MoveUp2()
-                
-               
- 
-    # --- Game logic should go here
     
     if ball.rect.y <= 0 or ball.rect.y >= 475:
         ball.vely = ball.vely * -1
@@ -140,22 +122,12 @@ while not done:
     elif ball.rect.x >= 1000:
         Player1Point()
 
-    # --- Screen-clearing code goes here
- 
-    # Here, we clear the screen to white. Don't put other drawing commands
-    # above this, or they will be erased with this command.
- 
-    # If you want a background image, replace this clear with blit'ing the
-    # background image.
     screen.fill(BLACK)
- 
-    # --- Drawing code should go here
+
     all_sprites_list.draw(screen)
-    # --- Go ahead and update the screen with what we've drawn.
+
     pygame.display.flip()
- 
-    # --- Limit to 60 frames per second
+
     clock.tick(60)
- 
-# Close the window and quit.
+
 pygame.quit()
